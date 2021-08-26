@@ -3,4 +3,9 @@
     <string name="facts">Facts</string>
     <string name="blogs">Blogs</string>
     <string name="deals">Deals</string>
+    <string name="about"><![CDATA[Welcome to the Marketplace!.\n Here you will get all never known facts.\nRead blongs.\nAnd get the top offers & deals]]></string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="facts_heading">Fact Heading</string>
+    <string name="facts_body">This is dummy Fact. This fact is never known. People never realised this in this way</string>
 </resources>
