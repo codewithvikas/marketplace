@@ -6,14 +6,13 @@
     tools:context=".FactsFragment"
     android:orientation="vertical">
 
-
     <TextView
         android:id="@+id/facts_heading_tv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/facts_heading"
         tools:text="@string/facts_heading"
-        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline1"/>
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline2"/>
     <TextView
         android:id="@+id/facts_detail_tv"
         android:layout_width="match_parent"
