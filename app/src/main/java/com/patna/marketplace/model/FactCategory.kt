@@ -5,5 +5,7 @@ enum class FactCategory {
     SPORTS,
     SCIENCE,
     NATURE,
-    BUSINESS
+    BUSINESS,
+    HISTORY,
+    PLANT
 }

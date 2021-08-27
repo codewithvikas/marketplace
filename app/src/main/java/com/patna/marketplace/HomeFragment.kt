@@ -36,7 +36,7 @@ class HomeFragment : Fragment() {
 
         homeBinding.fact = Fact(FactCategory.ANIMAL,"Cow is a pet Animal","Cow Gives milk.\n Cow dung is a great source of organic fertilizer")
 
-        homeBinding.factsBt.setOnClickListener (Navigation.createNavigateOnClickListener(R.id.homeFragmentToFactsFragment))
+        homeBinding.factsBt.setOnClickListener (Navigation.createNavigateOnClickListener(R.id.action_homeFragment_to_factCategory))
 
         homeBinding.blogBt.setOnClickListener {
             Toast.makeText(context,"Blogs coming soon", Toast.LENGTH_SHORT).show()

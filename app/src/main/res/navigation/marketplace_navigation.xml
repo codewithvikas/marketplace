@@ -10,9 +10,22 @@
         android:name="com.patna.marketplace.HomeFragment"
         tools:layout="@layout/fragment_home">
         <action
-            android:id="@+id/homeFragmentToFactsFragment"
-            app:destination="@id/factsFragment"/>
+            android:id="@+id/action_homeFragment_to_factCategory"
+            app:destination="@id/factCategoryFragment" />
     </fragment>
+
+    <fragment
+        android:id="@+id/factCategoryFragment"
+        android:name="com.patna.marketplace.FactCategoryFragment"
+        android:label="fragment_fact_category"
+        tools:layout="@layout/fragment_fact_category" >
+        <action
+            android:id="@+id/action_factCategory_to_factsFragment"
+            app:destination="@id/factsFragment"
+            app:popUpTo="@id/factCategoryFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+
     <fragment
         android:id="@+id/factsFragment"
         android:name="com.patna.marketplace.FactsFragment"
