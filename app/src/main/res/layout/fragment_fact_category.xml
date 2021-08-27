@@ -18,43 +18,43 @@
             android:id="@+id/animal_bt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/button_start_margin"
+            android:layout_margin="@dimen/start_margin"
             android:text="@{category.ANIMAL.toString()}" />
         <Button
             android:id="@+id/sports_bt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/button_start_margin"
+            android:layout_margin="@dimen/start_margin"
             android:text="@{category.SPORTS.toString()}" />
         <Button
             android:id="@+id/science_bt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/button_start_margin"
+            android:layout_margin="@dimen/start_margin"
             android:text="@{category.SCIENCE.toString()}" />
         <Button
             android:id="@+id/nature_bt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/button_start_margin"
+            android:layout_margin="@dimen/start_margin"
             android:text="@{category.NATURE.toString()}" />
         <Button
             android:id="@+id/business_bt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/button_start_margin"
+            android:layout_margin="@dimen/start_margin"
             android:text="@{category.BUSINESS.toString()}" />
         <Button
             android:id="@+id/history_bt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/button_start_margin"
+            android:layout_margin="@dimen/start_margin"
             android:text="@{category.HISTORY.toString()}" />
         <Button
             android:id="@+id/plants_bt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/button_start_margin"
+            android:layout_margin="@dimen/start_margin"
             android:text="@{category.PLANT.toString()}" />
     </LinearLayout>
 </layout>

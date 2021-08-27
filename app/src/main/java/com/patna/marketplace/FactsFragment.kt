@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.findNavController
 import com.patna.marketplace.databinding.FragmentFactsBinding
 
 class FactsFragment : Fragment() {
@@ -21,6 +22,9 @@ class FactsFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val binding  = FragmentFactsBinding.inflate(inflater)
+        binding.factsHeadingTv.setOnClickListener {
+            it.findNavController().navigate(R.id.action_factsFragment_to_factCategoryFragment)
+        }
 
         return binding.root
 
