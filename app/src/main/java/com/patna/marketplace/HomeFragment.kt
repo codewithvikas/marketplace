@@ -7,6 +7,7 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.patna.marketplace.databinding.FragmentHomeBinding
 import com.patna.marketplace.model.Fact
@@ -37,7 +38,9 @@ class HomeFragment : Fragment() {
 
         homeBinding.fact = Fact(FactCategory.ANIMAL,"Cow is a pet Animal","Cow Gives milk.\n Cow dung is a great source of organic fertilizer")
 
-        homeBinding.factsBt.setOnClickListener (Navigation.createNavigateOnClickListener(R.id.action_homeFragment_to_factCategory))
+        homeBinding.factsBt.setOnClickListener {
+            it.findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToFactCategory())
+        }
 
         homeBinding.blogBt.setOnClickListener {
             Toast.makeText(context,"Blogs coming soon", Toast.LENGTH_SHORT).show()

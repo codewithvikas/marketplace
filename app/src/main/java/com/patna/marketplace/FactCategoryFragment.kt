@@ -6,11 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import com.patna.marketplace.databinding.FragmentFactCategoryBinding
 import com.patna.marketplace.model.FactCategory
 
 // TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+// the fragment initialization parameters, e.g. ARG_ITEM_NUMBERf
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
@@ -28,7 +29,21 @@ class FactCategoryFragment : Fragment() {
         // Inflate the layout for this fragment
         val binding = FragmentFactCategoryBinding.inflate(inflater)
 
-        binding.animalBt.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_factCategory_to_factsFragment))
+        binding.animalBt.setOnClickListener{
+            it.findNavController().navigate(FactCategoryFragmentDirections.actionFactCategoryToFactsFragment(FactCategory.ANIMAL))
+        }
+        binding.historyBt.setOnClickListener{
+            it.findNavController().navigate(FactCategoryFragmentDirections.actionFactCategoryToFactsFragment(FactCategory.HISTORY))
+        }
+        binding.scienceBt.setOnClickListener{
+            it.findNavController().navigate(FactCategoryFragmentDirections.actionFactCategoryToFactsFragment(FactCategory.SCIENCE))
+        }
+        binding.natureBt.setOnClickListener{
+            it.findNavController().navigate(FactCategoryFragmentDirections.actionFactCategoryToFactsFragment(FactCategory.NATURE))
+        }
+        binding.businessBt.setOnClickListener{
+            it.findNavController().navigate(FactCategoryFragmentDirections.actionFactCategoryToFactsFragment(FactCategory.BUSINESS))
+        }
         return binding.root
     }
 }
