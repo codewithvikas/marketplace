@@ -4,9 +4,20 @@
     <string name="blogs">Blogs</string>
     <string name="deals">Deals</string>
     <string name="about"><![CDATA[Welcome to the Marketplace!.\n Here you will get all never known facts.\nRead blongs.\nAnd get the top offers & deals]]></string>
-    <!-- TODO: Remove or change this placeholder text -->
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="facts_heading">Fact Heading</string>
     <string name="facts_body">This is dummy Fact. This fact is never known. People never realised this in this way</string>
     <string name="animal">Animal</string>
+    <string name="category">Category</string>
+    <string name="marketplace_name">Muzaffarpur Marketplace( Buy Sell Rent)</string>
+    <string name="about_marketplace">Join to Buy, Sell, Rent or Promote your business/Services in #Muzaffarpur Marketplace # Facebook#FacebookMarketplace#Marketplace #Muzaffarpur</string>
+    <string name="admin_rules">
+        * Give more to this group than you take.
+        \n * Self-promotion, spam and irrelevant links aren\'t allowed.
+        \n * Make sure that everyone feels safe.Bullying of any kind isn\'t allowed, and degrading comments about things such as race, religion, culture, sexual orientation, gender or identity will not be tolerated.
+        \n * We\'re all in this together to create a welcoming environment. Let\'s treat everyone with respect. Healthy debates are natural, but kindness is required.
+        \n * Being part of this group requires mutual trust. Authentic, expressive discussions make groups great, but may also be sensitive and private. What\'s shared in the group should stay in the group.
+        \n\n #If any kind of cheating happens with any member then admin, moderator will not be responsible.</string>
+    <string name="about_title">About</string>
 </resources>
