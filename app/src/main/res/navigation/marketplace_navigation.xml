@@ -46,5 +46,10 @@
         android:name="com.patna.marketplace.AboutFragment"
         android:label="fragment_setting"
         tools:layout="@layout/fragment_about" />
+    <fragment
+        android:id="@+id/rulesFragment"
+        android:name="com.patna.marketplace.RulesFragment"
+        android:label="fragment_rules"
+        tools:layout="@layout/fragment_rules" />
 
 </navigation>
