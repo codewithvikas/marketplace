@@ -25,14 +25,5 @@
         android:src="@mipmap/marketplace"
         android:layout_gravity="center_horizontal"
         android:layout_margin="@dimen/start_margin"/>
-    <TextView
-        android:id="@+id/admin_rules_tv"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/admin_rules"
-        tools:text="@string/admin_rules"
-        android:fontFamily="@font/roboto"
-        android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
-        android:layout_margin="@dimen/start_margin"/>
 
 </LinearLayout>
