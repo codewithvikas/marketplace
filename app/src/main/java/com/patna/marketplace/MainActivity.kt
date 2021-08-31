@@ -23,7 +23,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var mainBinding:ActivityMainBinding
     private lateinit var drawerLayout:DrawerLayout
     private lateinit var appBarConfig: AppBarConfiguration
-
+    val timerExample = TimerExample()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,6 +50,8 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+
+        timerExample.startTimer()
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -57,4 +59,8 @@ class MainActivity : AppCompatActivity() {
         return NavigationUI.navigateUp(navController,appBarConfig)
     }
 
+    override fun onStart() {
+        super.onStart()
+        timerExample.stopTimer()
+    }
 }
