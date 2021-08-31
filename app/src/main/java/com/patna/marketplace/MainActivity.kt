@@ -14,7 +14,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var mainBinding:ActivityMainBinding
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var appBarConfig: AppBarConfiguration
-    val timerExample = TimerExample()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,8 +22,6 @@ class MainActivity : AppCompatActivity() {
         val navController = this.findNavController(R.id.marketplaceNavHostFragment)
         NavigationUI.setupActionBarWithNavController(this,navController)
 
-
-        timerExample.startTimer()
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -32,8 +29,5 @@ class MainActivity : AppCompatActivity() {
         return navController.navigateUp()
     }
 
-    override fun onStart() {
-        super.onStart()
-        timerExample.stopTimer()
-    }
+
 }
