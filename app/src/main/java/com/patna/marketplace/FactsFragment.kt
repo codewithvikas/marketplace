@@ -9,6 +9,10 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import com.patna.marketplace.databinding.FragmentFactsBinding
+import com.patna.marketplace.model.Constants
+import org.json.JSONArray
+import org.json.JSONObject
+import java.lang.StringBuilder
 
 class FactsFragment : Fragment() {
 
@@ -29,8 +33,22 @@ class FactsFragment : Fragment() {
         val args = FactsFragmentArgs.fromBundle(requireArguments())
 
         Toast.makeText(context,args.categoryType.name,Toast.LENGTH_SHORT).show()
+        binding.factsDetailTv.text = extractData()
         return binding.root
 
+    }
+    fun extractData():String{
+        val jsonObject = JSONObject(Constants.facts_json)
+        val facts = jsonObject.getJSONObject(Constants.facts)
+        val political:JSONArray = facts.getJSONArray(Constants.political)
+        val stringBuilder = StringBuilder()
+        for (i in 0 until political.length()){
+            val element:JSONObject = political.get(i) as JSONObject
+            stringBuilder.append(element.get(Constants.heading))
+            stringBuilder.append("\n")
+            stringBuilder.append(element.get(Constants.body))
+        }
+        return stringBuilder.toString()
     }
 
 }
