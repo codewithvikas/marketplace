@@ -1,6 +1,10 @@
 package com.patna.marketplace
 
+import android.app.Service
+import android.os.Build
 import android.os.Bundle
+import android.os.VibrationEffect
+import android.os.Vibrator
 import android.text.format.DateUtils
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -10,6 +14,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ServiceLifecycleDispatcher
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.patna.marketplace.databinding.FragmentFactsBinding
@@ -23,6 +28,8 @@ class FactsFragment : Fragment() {
 
     lateinit var factsViewModel: FactsViewModel
     lateinit var factsViewModelFactory: FactsViewModelFactory
+
+    val GAME_OVER_BUZZ_PATTERN = longArrayOf(0,2000)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,6 +51,7 @@ class FactsFragment : Fragment() {
         Toast.makeText(context,args.categoryType.name,Toast.LENGTH_SHORT).show()
         factsViewModel.timerFinished.observe(viewLifecycleOwner, Observer {
             if (it==true){
+                buzz(GAME_OVER_BUZZ_PATTERN)
                 Toast.makeText(context,"Timer has finished !!",Toast.LENGTH_SHORT).show()
                 factsViewModel.onGameFinishComplete()
             }
@@ -52,6 +60,19 @@ class FactsFragment : Fragment() {
         return binding.root
 
     }
+
+private fun buzz(pattern:LongArray){
+    val buzzer = activity?.getSystemService(Service.VIBRATOR_SERVICE) as Vibrator
+
+    buzzer?.let {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            buzzer.vibrate(VibrationEffect.createWaveform(pattern,-1))
+        }
+        else{
+            buzzer.vibrate(pattern,-1)
+        }
+    }
+}
 
 
 }
