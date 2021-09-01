@@ -1,12 +1,16 @@
 package com.patna.marketplace
 
 import android.os.Bundle
+import android.text.format.DateUtils
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.patna.marketplace.databinding.FragmentFactsBinding
 import com.patna.marketplace.model.Constants
@@ -17,9 +21,7 @@ import java.lang.StringBuilder
 class FactsFragment : Fragment() {
 
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
+    lateinit var factsViewModel: FactsViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,25 +32,32 @@ class FactsFragment : Fragment() {
         binding.factsHeadingTv.setOnClickListener {
             it.findNavController().navigate(FactsFragmentDirections.actionFactsFragmentToFactCategoryFragment())
         }
+
+        Log.i(FactsFragment::class.simpleName,"ViewModelProvider Called")
+        factsViewModel = ViewModelProvider(this).get(FactsViewModel::class.java)
+
         val args = FactsFragmentArgs.fromBundle(requireArguments())
 
         Toast.makeText(context,args.categoryType.name,Toast.LENGTH_SHORT).show()
-        binding.factsDetailTv.text = extractData()
+
+        factsViewModel.facts.observe(viewLifecycleOwner,{
+            binding.factsDetailTv.text = it
+        })
+
+        factsViewModel.currentTime.observe(viewLifecycleOwner, Observer {
+
+            binding.timerTv.setText(DateUtils.formatElapsedTime(it))
+        })
+        factsViewModel.timerFinished.observe(viewLifecycleOwner, Observer {
+            if (it==true){
+                Toast.makeText(context,"Timer has finished !!",Toast.LENGTH_SHORT).show()
+                factsViewModel.onGameFinishComplete()
+            }
+
+        })
         return binding.root
 
     }
-    fun extractData():String{
-        val jsonObject = JSONObject(Constants.facts_json)
-        val facts = jsonObject.getJSONObject(Constants.facts)
-        val political:JSONArray = facts.getJSONArray(Constants.political)
-        val stringBuilder = StringBuilder()
-        for (i in 0 until political.length()){
-            val element:JSONObject = political.get(i) as JSONObject
-            stringBuilder.append(element.get(Constants.heading))
-            stringBuilder.append("\n")
-            stringBuilder.append(element.get(Constants.body))
-        }
-        return stringBuilder.toString()
-    }
+
 
 }
