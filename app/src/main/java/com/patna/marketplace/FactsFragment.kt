@@ -22,6 +22,7 @@ class FactsFragment : Fragment() {
 
 
     lateinit var factsViewModel: FactsViewModel
+    lateinit var factsViewModelFactory: FactsViewModelFactory
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,11 +33,11 @@ class FactsFragment : Fragment() {
         binding.factsHeadingTv.setOnClickListener {
             it.findNavController().navigate(FactsFragmentDirections.actionFactsFragmentToFactCategoryFragment())
         }
-
-        Log.i(FactsFragment::class.simpleName,"ViewModelProvider Called")
-        factsViewModel = ViewModelProvider(this).get(FactsViewModel::class.java)
-
         val args = FactsFragmentArgs.fromBundle(requireArguments())
+
+        factsViewModelFactory = FactsViewModelFactory(args.categoryType)
+        factsViewModel = ViewModelProvider(this,factsViewModelFactory).get(FactsViewModel::class.java)
+
 
         Toast.makeText(context,args.categoryType.name,Toast.LENGTH_SHORT).show()
 

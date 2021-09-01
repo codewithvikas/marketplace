@@ -2,16 +2,18 @@ package com.patna.marketplace
 
 import android.os.CountDownTimer
 import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.patna.marketplace.model.Constants
 import com.patna.marketplace.model.Fact
+import com.patna.marketplace.model.FactCategory
 import org.json.JSONArray
 import org.json.JSONObject
 import java.lang.StringBuilder
 
-class FactsViewModel :ViewModel() {
+class FactsViewModel(private val category: FactCategory) :ViewModel() {
 
     companion object{
         const val DONE = 0L
