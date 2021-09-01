@@ -38,12 +38,11 @@ class FactsFragment : Fragment() {
         factsViewModelFactory = FactsViewModelFactory(args.categoryType)
         factsViewModel = ViewModelProvider(this,factsViewModelFactory).get(FactsViewModel::class.java)
 
+        binding.factsViewModel = factsViewModel
+        binding.setLifecycleOwner(viewLifecycleOwner)
 
         Toast.makeText(context,args.categoryType.name,Toast.LENGTH_SHORT).show()
 
-        factsViewModel.facts.observe(viewLifecycleOwner,{
-            binding.factsDetailTv.text = it
-        })
 
         factsViewModel.currentTime.observe(viewLifecycleOwner, Observer {
 
