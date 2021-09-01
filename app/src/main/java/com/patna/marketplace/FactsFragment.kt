@@ -42,12 +42,6 @@ class FactsFragment : Fragment() {
         binding.setLifecycleOwner(viewLifecycleOwner)
 
         Toast.makeText(context,args.categoryType.name,Toast.LENGTH_SHORT).show()
-
-
-        factsViewModel.currentTime.observe(viewLifecycleOwner, Observer {
-
-            binding.timerTv.setText(DateUtils.formatElapsedTime(it))
-        })
         factsViewModel.timerFinished.observe(viewLifecycleOwner, Observer {
             if (it==true){
                 Toast.makeText(context,"Timer has finished !!",Toast.LENGTH_SHORT).show()

@@ -17,7 +17,7 @@
             android:id="@+id/timer_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:text="@string/timer"
+            tools:text="@{factsViewModel.currentTimeString}"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Headline2"/>
 
 

@@ -1,10 +1,12 @@
 package com.patna.marketplace
 
 import android.os.CountDownTimer
+import android.text.format.DateUtils
 import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import com.patna.marketplace.model.Constants
 import com.patna.marketplace.model.Fact
@@ -24,6 +26,10 @@ class FactsViewModel(private val category: FactCategory) :ViewModel() {
     private val _currentTime = MutableLiveData<Long>()
     val currentTime:LiveData<Long>
     get() = _currentTime
+
+    val currentTimeString = Transformations.map(currentTime,{time->
+        DateUtils.formatElapsedTime(time)
+    })
 
     private val _timerFinished = MutableLiveData<Boolean>()
     val timerFinished:LiveData<Boolean>
