@@ -14,14 +14,6 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/timer_tv"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:text="@{factsViewModel.currentTimeString}"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline2"/>
-
-
-        <TextView
             android:id="@+id/facts_heading_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -35,8 +27,6 @@
                 android:id="@+id/facts_detail_tv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@{factsViewModel.facts}"
-                tools:text="@string/facts_body"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"/>
 
         </ScrollView>

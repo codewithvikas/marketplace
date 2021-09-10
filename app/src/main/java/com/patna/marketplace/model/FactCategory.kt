@@ -7,5 +7,6 @@ enum class FactCategory {
     NATURE,
     BUSINESS,
     HISTORY,
-    PLANT
+    PLANT,
+    POLITICAL
 }

@@ -1,80 +1,99 @@
 package com.patna.marketplace
 
+import android.app.Application
 import android.os.CountDownTimer
 import android.text.format.DateUtils
 import android.util.Log
 import android.widget.Toast
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.*
 import com.patna.marketplace.model.Constants
 import com.patna.marketplace.model.Fact
 import com.patna.marketplace.model.FactCategory
+import com.patna.marketplace.model.FactDao
+import kotlinx.coroutines.*
 import org.json.JSONArray
 import org.json.JSONObject
 import java.lang.StringBuilder
 
-class FactsViewModel(private val category: FactCategory) :ViewModel() {
+class FactsViewModel(private val factDao: FactDao,application: Application) :AndroidViewModel(application) {
 
-    companion object{
-        const val DONE = 0L
-        const val ONE_SECOND = 1000L
-        const val COUNTDOWN_TIME = 10000L
+    private val viewModelJob = Job()
 
-    }
-    private val _currentTime = MutableLiveData<Long>()
-    val currentTime:LiveData<Long>
-    get() = _currentTime
+    private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
-    val currentTimeString = Transformations.map(currentTime,{time->
-        DateUtils.formatElapsedTime(time)
-    })
-
-    private val _timerFinished = MutableLiveData<Boolean>()
-    val timerFinished:LiveData<Boolean>
-    get() = _timerFinished
-
-    private val _facts = MutableLiveData<String>()
-    val facts:LiveData<String>
-    get() = _facts
-
-    private val timer:CountDownTimer
+    private var _facts = MutableLiveData<List<Fact>>()
+    val facts:LiveData<List<Fact>>
+     get() = _facts
     init {
-        timer = object :CountDownTimer(COUNTDOWN_TIME, ONE_SECOND){
-            override fun onTick(millisUntilFinished: Long) {
-                _currentTime.value  = millisUntilFinished
-            }
 
-            override fun onFinish() {
-                _timerFinished.value = true
-            }
+        initializeDatabase()
 
-        }
-        timer.start()
-        _facts.value = extractData()
+        initializeFacts()
+
+
     }
 
-    fun onGameFinishComplete(){
-        _timerFinished.value = false
-    }
 
     override fun onCleared() {
         super.onCleared()
-        timer.cancel()
+        viewModelJob.cancel()
     }
 
-    fun extractData():String{
+    private fun initializeFacts(){
+        uiScope.launch {
+            _facts.value = getFactsFromDatabase()
+
+        }
+    }
+    private fun initializeDatabase(){
+        uiScope.launch {
+            val facts = extractData()
+            insert(facts)
+        }
+    }
+
+    private suspend fun getFactsFromDatabase():List<Fact>{
+
+        return withContext(Dispatchers.IO){
+            val facts = factDao.getAllFacts()
+
+            facts
+        }
+    }
+    /*private suspend fun initializeAndGetData(){
+        val job = uiScope.launch {
+            val facts = extractData()
+            insert(facts)
+        }
+        job.join()
+
+        uiScope.launch {
+            _facts.value = getFactsFromDatabase()
+            Log.i(FactsViewModel::class.simpleName,"${_facts.value}")
+
+        }
+
+    }*/
+    private suspend fun insert(facts: List<Fact>){
+        withContext(Dispatchers.IO){
+            for (fact in facts){
+                factDao.insert(fact)
+            }
+
+        }
+
+    }
+    private fun extractData():List<Fact>{
+        val facts = mutableListOf<Fact>()
         val jsonObject = JSONObject(Constants.facts_json)
-        val facts = jsonObject.getJSONObject(Constants.facts)
-        val political: JSONArray = facts.getJSONArray(Constants.political)
-        val stringBuilder = StringBuilder()
+        val factsJson = jsonObject.getJSONObject(Constants.facts)
+        val political: JSONArray = factsJson.getJSONArray(Constants.political)
         for (i in 0 until political.length()){
             val element: JSONObject = political.get(i) as JSONObject
-            stringBuilder.append(element.get(Constants.heading))
-            stringBuilder.append("\n")
-            stringBuilder.append(element.get(Constants.body))
+            val heading = element.get(Constants.heading) as String
+            val body = element.get(Constants.body) as String
+            facts.add(Fact(category = FactCategory.POLITICAL,heading = heading,body = body))
         }
-        return stringBuilder.toString()
+        return facts
     }
 }

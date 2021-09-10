@@ -32,11 +32,6 @@
         android:name="com.patna.marketplace.FactsFragment"
         android:label="{categoryType}"
         tools:layout="@layout/fragment_facts">
-        <action
-            android:id="@+id/action_factsFragment_to_factCategoryFragment"
-            app:destination="@id/factCategoryFragment"
-            app:popUpTo="@id/homeFragment"
-            app:popUpToInclusive="false" />
         <argument
             android:name="categoryType"
             app:argType="com.patna.marketplace.model.FactCategory" />
