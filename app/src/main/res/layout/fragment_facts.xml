@@ -27,7 +27,6 @@
                 android:id="@+id/facts_detail_tv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                tools:text="@{factsViewModel.facts.toString()}"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"/>
 
         </ScrollView>

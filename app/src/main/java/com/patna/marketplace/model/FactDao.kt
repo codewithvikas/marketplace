@@ -25,5 +25,5 @@ interface FactDao {
     fun getAllFactsByCategory(factCategory: FactCategory): LiveData<List<Fact>>
 
     @Query("SELECT * FROM fact_table")
-    fun getAllFacts():LiveData<List<Fact>>
+    fun getAllFacts():List<Fact>
 }

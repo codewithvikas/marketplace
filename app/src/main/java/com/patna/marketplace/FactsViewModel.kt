@@ -15,7 +15,7 @@ import org.json.JSONArray
 import org.json.JSONObject
 import java.lang.StringBuilder
 
-class FactsViewModel(val factDao: FactDao,application: Application) :AndroidViewModel(application) {
+class FactsViewModel(private val factDao: FactDao,application: Application) :AndroidViewModel(application) {
 
     private val viewModelJob = Job()
 
@@ -26,8 +26,11 @@ class FactsViewModel(val factDao: FactDao,application: Application) :AndroidView
      get() = _facts
     init {
 
-        initializeFacts()
         initializeDatabase()
+
+        initializeFacts()
+
+
     }
 
 
@@ -38,7 +41,7 @@ class FactsViewModel(val factDao: FactDao,application: Application) :AndroidView
 
     private fun initializeFacts(){
         uiScope.launch {
-            _facts.value = getFactsFromDatabase().value
+            _facts.value = getFactsFromDatabase()
 
         }
     }
@@ -49,7 +52,7 @@ class FactsViewModel(val factDao: FactDao,application: Application) :AndroidView
         }
     }
 
-    private suspend fun getFactsFromDatabase():LiveData<List<Fact>>{
+    private suspend fun getFactsFromDatabase():List<Fact>{
 
         return withContext(Dispatchers.IO){
             val facts = factDao.getAllFacts()
@@ -57,7 +60,20 @@ class FactsViewModel(val factDao: FactDao,application: Application) :AndroidView
             facts
         }
     }
+    /*private suspend fun initializeAndGetData(){
+        val job = uiScope.launch {
+            val facts = extractData()
+            insert(facts)
+        }
+        job.join()
 
+        uiScope.launch {
+            _facts.value = getFactsFromDatabase()
+            Log.i(FactsViewModel::class.simpleName,"${_facts.value}")
+
+        }
+
+    }*/
     private suspend fun insert(facts: List<Fact>){
         withContext(Dispatchers.IO){
             for (fact in facts){

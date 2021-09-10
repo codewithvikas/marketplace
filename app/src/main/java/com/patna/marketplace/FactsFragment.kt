@@ -35,6 +35,10 @@ class FactsFragment : Fragment() {
         binding.factsViewModel = factsViewModel
         binding.setLifecycleOwner(viewLifecycleOwner)
 
+        factsViewModel.facts.observe(viewLifecycleOwner,{
+            binding.factsDetailTv.setText(it.toString())
+        })
+
         Toast.makeText(context,args.categoryType.name,Toast.LENGTH_SHORT).show()
 
         return binding.root
