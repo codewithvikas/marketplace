@@ -36,7 +36,7 @@ class HomeFragment : Fragment() {
         // Inflate the layout for this fragment
         homeBinding = DataBindingUtil.inflate(inflater,R.layout.fragment_home,container,false)
 
-        homeBinding.fact = Fact(FactCategory.ANIMAL,"Cow is a pet Animal","Cow Gives milk.\n Cow dung is a great source of organic fertilizer")
+        homeBinding.fact = Fact(category = FactCategory.ANIMAL,heading = "Cow is a pet Animal",body = "Cow Gives milk.\n Cow dung is a great source of organic fertilizer")
 
         homeBinding.factsBt.setOnClickListener {
             it.findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToFactCategory())
