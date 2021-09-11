@@ -1,10 +1,6 @@
-package com.patna.marketplace
+package com.patna.marketplace.viewmodel
 
 import android.app.Application
-import android.os.CountDownTimer
-import android.text.format.DateUtils
-import android.util.Log
-import android.widget.Toast
 import androidx.lifecycle.*
 import com.patna.marketplace.model.Constants
 import com.patna.marketplace.model.Fact
@@ -13,7 +9,6 @@ import com.patna.marketplace.model.FactDao
 import kotlinx.coroutines.*
 import org.json.JSONArray
 import org.json.JSONObject
-import java.lang.StringBuilder
 
 class FactsViewModel(private val factDao: FactDao,application: Application) :AndroidViewModel(application) {
 

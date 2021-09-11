@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.patna.marketplace.HomeFragment"
+        android:name="com.patna.marketplace.views.HomeFragment"
         android:label="Home">
         <action
             android:id="@+id/action_homeFragment_to_factCategory"
@@ -16,20 +16,18 @@
 
     <fragment
         android:id="@+id/factCategoryFragment"
-        android:name="com.patna.marketplace.FactCategoryFragment"
+        android:name="com.patna.marketplace.views.FactCategoryFragment"
         android:label="@string/category"
         tools:layout="@layout/fragment_fact_category">
         <action
             android:id="@+id/action_factCategory_to_factsFragment"
-            app:destination="@id/factsFragment"
-            app:popUpTo="@id/factCategoryFragment"
-            app:popUpToInclusive="true"/>
+            app:destination="@id/factsFragment" />
 
     </fragment>
 
     <fragment
         android:id="@+id/factsFragment"
-        android:name="com.patna.marketplace.FactsFragment"
+        android:name="com.patna.marketplace.views.FactsFragment"
         android:label="{categoryType}"
         tools:layout="@layout/fragment_facts">
         <argument
@@ -38,7 +36,7 @@
     </fragment>
     <fragment
         android:id="@+id/aboutFragment"
-        android:name="com.patna.marketplace.AboutFragment"
+        android:name="com.patna.marketplace.views.AboutFragment"
         android:label="fragment_setting"
         tools:layout="@layout/fragment_about" />
 

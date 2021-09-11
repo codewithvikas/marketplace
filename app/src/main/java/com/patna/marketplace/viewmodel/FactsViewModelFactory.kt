@@ -1,9 +1,8 @@
-package com.patna.marketplace
+package com.patna.marketplace.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.patna.marketplace.model.FactCategory
 import com.patna.marketplace.model.FactDao
 import java.lang.IllegalArgumentException
 
