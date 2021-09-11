@@ -21,9 +21,7 @@
         tools:layout="@layout/fragment_fact_category">
         <action
             android:id="@+id/action_factCategory_to_factsFragment"
-            app:destination="@id/factsFragment"
-            app:popUpTo="@id/factCategoryFragment"
-            app:popUpToInclusive="true"/>
+            app:destination="@id/factsFragment" />
 
     </fragment>
 

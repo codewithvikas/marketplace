@@ -18,9 +18,7 @@ class FactAdapter: RecyclerView.Adapter<FactAdapter.FactViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FactViewHolder {
-       val layoutInflater = LayoutInflater.from(parent.context)
-        val view = layoutInflater.inflate(R.layout.fact_list_item,parent,false)
-        return FactViewHolder(view)
+       return FactViewHolder.from(parent)
 
     }
 
@@ -44,6 +42,13 @@ class FactAdapter: RecyclerView.Adapter<FactAdapter.FactViewHolder>() {
         fun bindData(fact: Fact){
             headingView.setText(fact.heading)
             bodyView.setText(fact.body)
+        }
+        companion object{
+            fun from(parent: ViewGroup):FactViewHolder{
+                val layoutInflater = LayoutInflater.from(parent.context)
+                val view = layoutInflater.inflate(R.layout.fact_list_item,parent,false)
+                return FactViewHolder(view)
+            }
         }
     }
 }
