@@ -5,7 +5,7 @@
     <data>
         <variable
             name="factsViewModel"
-            type="com.patna.marketplace.FactsViewModel" />
+            type="com.patna.marketplace.viewmodel.FactsViewModel" />
     </data>
    <androidx.recyclerview.widget.RecyclerView
        android:id="@+id/fact_list"

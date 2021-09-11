@@ -1,4 +1,4 @@
-package com.patna.marketplace
+package com.patna.marketplace.views
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

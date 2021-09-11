@@ -1,4 +1,4 @@
-package com.patna.marketplace
+package com.patna.marketplace.views
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -6,6 +6,7 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
+import com.patna.marketplace.R
 import com.patna.marketplace.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {

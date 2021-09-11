@@ -1,4 +1,4 @@
-package com.patna.marketplace
+package com.patna.marketplace.views
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,7 +7,8 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.findNavController
+import com.patna.marketplace.viewmodel.FactsViewModel
+import com.patna.marketplace.viewmodel.FactsViewModelFactory
 import com.patna.marketplace.databinding.FragmentFactsBinding
 import com.patna.marketplace.model.FactAdapter
 import com.patna.marketplace.model.MarketPlaceDatabase

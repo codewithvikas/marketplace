@@ -1,14 +1,13 @@
-package com.patna.marketplace
+package com.patna.marketplace.views
 
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
-import androidx.navigation.Navigation
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
+import com.patna.marketplace.R
 import com.patna.marketplace.databinding.FragmentHomeBinding
 import com.patna.marketplace.model.Fact
 import com.patna.marketplace.model.FactCategory
@@ -34,7 +33,7 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
-        homeBinding = DataBindingUtil.inflate(inflater,R.layout.fragment_home,container,false)
+        homeBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_home,container,false)
 
         homeBinding.fact = Fact(category = FactCategory.ANIMAL,heading = "Cow is a pet Animal",body = "Cow Gives milk.\n Cow dung is a great source of organic fertilizer")
 
