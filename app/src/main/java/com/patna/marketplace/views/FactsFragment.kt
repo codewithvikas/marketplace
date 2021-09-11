@@ -1,17 +1,22 @@
 package com.patna.marketplace.views
 
+import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.patna.marketplace.viewmodel.FactsViewModel
 import com.patna.marketplace.viewmodel.FactsViewModelFactory
 import com.patna.marketplace.databinding.FragmentFactsBinding
 import com.patna.marketplace.model.FactAdapter
+import com.patna.marketplace.model.FactListItemListener
 import com.patna.marketplace.model.MarketPlaceDatabase
 
 class FactsFragment : Fragment() {
@@ -38,10 +43,12 @@ class FactsFragment : Fragment() {
         binding.factsViewModel = factsViewModel
         binding.setLifecycleOwner(viewLifecycleOwner)
 
-        val adapter = FactAdapter()
+        val adapter = FactAdapter(FactListItemListener { factId ->
+            Toast.makeText(requireContext(),"Fact Id : ${factId}",Toast.LENGTH_SHORT).show()
+        })
         binding.factList.adapter = adapter
 
-        val layoutManager = GridLayoutManager(requireContext(),3)
+        val layoutManager = LinearLayoutManager(requireContext(),RecyclerView.VERTICAL,false)
         binding.factList.layoutManager = layoutManager
 
         factsViewModel.facts.observe(viewLifecycleOwner,{

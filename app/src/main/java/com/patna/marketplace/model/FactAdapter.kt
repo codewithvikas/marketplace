@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.patna.marketplace.databinding.FactListItemBinding
 
-class FactAdapter: ListAdapter<Fact, FactAdapter.FactViewHolder>(FactDiffCallback()) {
+class FactAdapter(val clickListener: FactListItemListener): ListAdapter<Fact, FactAdapter.FactViewHolder>(FactDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FactViewHolder {
        return FactViewHolder.from(parent)
@@ -16,17 +16,17 @@ class FactAdapter: ListAdapter<Fact, FactAdapter.FactViewHolder>(FactDiffCallbac
 
     override fun onBindViewHolder(holder: FactViewHolder, position: Int) {
         val fact = getItem(position)
-        holder.bindData(fact)
+        holder.bind(fact,clickListener)
     }
 
 
     class FactViewHolder(val binding: FactListItemBinding): RecyclerView.ViewHolder(binding.root) {
 
-        fun bindData(fact: Fact) {
+        fun bind(fact: Fact,clickListener: FactListItemListener) {
             //binding.headingTv.setText(fact.heading)
             binding.fact = fact
+            binding.clickListener = clickListener
             binding.executePendingBindings()
-
         }
         companion object{
             fun from(parent: ViewGroup):FactViewHolder{
@@ -47,4 +47,8 @@ class FactDiffCallback: DiffUtil.ItemCallback<Fact>(){
        return oldItem==newItem
     }
 
+}
+
+class FactListItemListener(val clickListener: (factId:Long)->Unit){
+    fun onClick(fact:Fact) = clickListener(fact.factId)
 }
