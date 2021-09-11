@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.GridLayoutManager
 import com.patna.marketplace.viewmodel.FactsViewModel
 import com.patna.marketplace.viewmodel.FactsViewModelFactory
 import com.patna.marketplace.databinding.FragmentFactsBinding
@@ -40,9 +41,12 @@ class FactsFragment : Fragment() {
         val adapter = FactAdapter()
         binding.factList.adapter = adapter
 
+        val layoutManager = GridLayoutManager(requireContext(),3)
+        binding.factList.layoutManager = layoutManager
+
         factsViewModel.facts.observe(viewLifecycleOwner,{
            it?.let {
-               adapter.data = it
+               adapter.submitList(it)
            }
         })
 
