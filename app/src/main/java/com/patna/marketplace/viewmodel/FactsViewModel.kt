@@ -19,6 +19,11 @@ class FactsViewModel(private val factDao: FactDao,application: Application) :And
     private var _facts = MutableLiveData<List<Fact>>()
     val facts:LiveData<List<Fact>>
      get() = _facts
+
+    private var _navigateToFactDetail = MutableLiveData<Long>()
+    val navigateToFactDetail
+    get() = _navigateToFactDetail
+
     init {
 
         initializeDatabase()
@@ -91,4 +96,12 @@ class FactsViewModel(private val factDao: FactDao,application: Application) :And
         }
         return facts
     }
+
+    fun onFactItemClicked(factId:Long) {
+            _navigateToFactDetail.value = factId
+    }
+    fun onFactItemNavigated(){
+        _navigateToFactDetail.value = null
+    }
+
 }
