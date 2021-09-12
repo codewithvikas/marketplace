@@ -1,23 +1,23 @@
 package com.patna.marketplace.views
 
-import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.GridLayoutManager
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.patna.marketplace.viewmodel.FactsViewModel
 import com.patna.marketplace.viewmodel.FactsViewModelFactory
 import com.patna.marketplace.databinding.FragmentFactsBinding
-import com.patna.marketplace.model.FactAdapter
-import com.patna.marketplace.model.FactListItemListener
-import com.patna.marketplace.model.MarketPlaceDatabase
+import com.patna.marketplace.model.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class FactsFragment : Fragment() {
 
@@ -32,8 +32,6 @@ class FactsFragment : Fragment() {
         // Inflate the layout for this fragment
         val binding  = FragmentFactsBinding.inflate(inflater)
 
-        val args = FactsFragmentArgs.fromBundle(requireArguments())
-
         val application = requireNotNull(this.activity).application
         val factDao = MarketPlaceDatabase.getInstance(application).factDao
 
@@ -44,20 +42,25 @@ class FactsFragment : Fragment() {
         binding.setLifecycleOwner(viewLifecycleOwner)
 
         val adapter = FactAdapter(FactListItemListener { factId ->
-            Toast.makeText(requireContext(),"Fact Id : ${factId}",Toast.LENGTH_SHORT).show()
+            factsViewModel.onFactItemClicked(factId)
         })
         binding.factList.adapter = adapter
 
         val layoutManager = LinearLayoutManager(requireContext(),RecyclerView.VERTICAL,false)
         binding.factList.layoutManager = layoutManager
 
+        factsViewModel.navigateToFactDetail.observe(viewLifecycleOwner,{ nightId ->
+            nightId?.let {
+               this.findNavController().navigate(FactsFragmentDirections.factsFragmentToFactDetailFragment(nightId))
+                factsViewModel.onFactItemNavigated()
+           }
+
+        })
         factsViewModel.facts.observe(viewLifecycleOwner,{
            it?.let {
-               adapter.submitList(it)
+               adapter.addHeaderAndSubmitList(it)
            }
         })
-
-        Toast.makeText(context,args.categoryType.name,Toast.LENGTH_SHORT).show()
 
         return binding.root
 

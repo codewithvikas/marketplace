@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.patna.marketplace.databinding.FragmentFactDetailBinding
 
 class FactDetailFragment : Fragment() {
 
@@ -13,6 +14,12 @@ class FactDetailFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return super.onCreateView(inflater, container, savedInstanceState)
+        val binding = FragmentFactDetailBinding.inflate(inflater)
+        val arguments = FactDetailFragmentArgs.fromBundle(requireArguments())
+
+        binding.fact = arguments.factId
+
+
+        return binding.root
     }
 }

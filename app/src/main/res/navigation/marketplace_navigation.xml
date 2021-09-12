@@ -33,11 +33,24 @@
         <argument
             android:name="categoryType"
             app:argType="com.patna.marketplace.model.FactCategory" />
+        <action
+            android:id="@+id/factsFragment_to_factDetailFragment"
+            app:destination="@id/factDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/aboutFragment"
         android:name="com.patna.marketplace.views.AboutFragment"
         android:label="fragment_setting"
         tools:layout="@layout/fragment_about" />
+
+    <fragment
+        android:id="@+id/factDetailFragment"
+        android:name="com.patna.marketplace.views.FactDetailFragment"
+        android:label="@string/fact_detail"
+        tools:layout="@layout/fragment_fact_detail">
+        <argument
+            android:name="factId"
+            app:argType="long"/>
+    </fragment>
 
 </navigation>
