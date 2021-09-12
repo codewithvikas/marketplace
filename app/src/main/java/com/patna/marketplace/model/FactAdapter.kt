@@ -1,21 +1,13 @@
 package com.patna.marketplace.model
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.patna.marketplace.R
+import com.patna.marketplace.databinding.FactListItemBinding
 
-class FactAdapter: RecyclerView.Adapter<FactAdapter.FactViewHolder>() {
-
-
-    var data = listOf<Fact>()
-    set(value) {
-        field = value
-        notifyDataSetChanged()
-    }
-
+class FactAdapter(val clickListener: FactListItemListener): ListAdapter<Fact, FactAdapter.FactViewHolder>(FactDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FactViewHolder {
        return FactViewHolder.from(parent)
@@ -23,32 +15,40 @@ class FactAdapter: RecyclerView.Adapter<FactAdapter.FactViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: FactViewHolder, position: Int) {
-        val fact = data.get(position)
-        holder.bindData(fact)
+        val fact = getItem(position)
+        holder.bind(fact,clickListener)
     }
 
-    override fun getItemCount(): Int {
-        return data.size
-    }
 
-    class FactViewHolder(itemView:View): RecyclerView.ViewHolder(itemView) {
+    class FactViewHolder(val binding: FactListItemBinding): RecyclerView.ViewHolder(binding.root) {
 
-        private val headingView:TextView
-        private val bodyView:TextView
-        init {
-            headingView = itemView.findViewById(R.id.heading_tv)
-            bodyView = itemView.findViewById(R.id.body_tv)
-        }
-        fun bindData(fact: Fact){
-            headingView.setText(fact.heading)
-            bodyView.setText(fact.body)
+        fun bind(fact: Fact,clickListener: FactListItemListener) {
+            //binding.headingTv.setText(fact.heading)
+            binding.fact = fact
+            binding.clickListener = clickListener
+            binding.executePendingBindings()
         }
         companion object{
             fun from(parent: ViewGroup):FactViewHolder{
                 val layoutInflater = LayoutInflater.from(parent.context)
-                val view = layoutInflater.inflate(R.layout.fact_list_item,parent,false)
-                return FactViewHolder(view)
+                val binding = FactListItemBinding.inflate(layoutInflater,parent,false)
+                return FactViewHolder(binding)
             }
         }
     }
+}
+
+class FactDiffCallback: DiffUtil.ItemCallback<Fact>(){
+    override fun areItemsTheSame(oldItem: Fact, newItem: Fact): Boolean {
+        return oldItem.factId.equals(newItem.factId)
+    }
+
+    override fun areContentsTheSame(oldItem: Fact, newItem: Fact): Boolean {
+       return oldItem==newItem
+    }
+
+}
+
+class FactListItemListener(val clickListener: (factId:Long)->Unit){
+    fun onClick(fact:Fact) = clickListener(fact.factId)
 }
