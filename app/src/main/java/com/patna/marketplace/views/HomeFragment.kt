@@ -41,8 +41,8 @@ class HomeFragment : Fragment() {
             it.findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToFactCategory())
         }
 
-        homeBinding.blogBt.setOnClickListener {
-            Toast.makeText(context,"Blogs coming soon", Toast.LENGTH_SHORT).show()
+        homeBinding.blogBt.setOnClickListener {view->
+            view.findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToBloggerFragment())
         }
         homeBinding.dealsBt.setOnClickListener {
             Toast.makeText(context,"Offer and deals coming soon", Toast.LENGTH_SHORT).show()
