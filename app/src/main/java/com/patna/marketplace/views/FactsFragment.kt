@@ -13,9 +13,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.patna.marketplace.viewmodel.FactsViewModel
 import com.patna.marketplace.viewmodel.FactsViewModelFactory
 import com.patna.marketplace.databinding.FragmentFactsBinding
-import com.patna.marketplace.model.FactAdapter
-import com.patna.marketplace.model.FactListItemListener
-import com.patna.marketplace.model.MarketPlaceDatabase
+import com.patna.marketplace.model.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class FactsFragment : Fragment() {
 
@@ -56,7 +58,7 @@ class FactsFragment : Fragment() {
         })
         factsViewModel.facts.observe(viewLifecycleOwner,{
            it?.let {
-               adapter.submitList(it)
+               adapter.addHeaderAndSubmitList(it)
            }
         })
 
