@@ -22,4 +22,5 @@
     <string name="about_title">About</string>
     <string name="timer">Timer</string>
     <string name="fact_detail">Fact Detail</string>
+    <string name="blogger_label">Blogs</string>
 </resources>

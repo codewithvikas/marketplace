@@ -12,6 +12,10 @@
         <action
             android:id="@+id/action_homeFragment_to_factCategory"
             app:destination="@id/factCategoryFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_BloggerFragment"
+            app:destination="@id/bloggerFragment"/>
+
     </fragment>
 
     <fragment
@@ -53,4 +57,9 @@
             app:argType="long"/>
     </fragment>
 
+    <fragment
+        android:id="@+id/bloggerFragment"
+        android:name="com.patna.marketplace.views.BloggerFragment"
+        android:label="@string/blogger_label"
+        tools:layout="@layout/fragment_blogger"/>
 </navigation>
